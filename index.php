@@ -22,7 +22,7 @@ require_once('model/main.php');
 <?php
 /**
  *
-      // Test of Methods
+      // display test methods
 */
 $users = getAllUsers();
 foreach ($users as $user){

@@ -38,6 +38,21 @@ function getClassDepByID($classID){
     return $department;
 }
 
+// get a classID with the $depName@param
+function getClassIDWithDepName($depName){
+    global $db;
+    // select user with username
+    $query = 'SELECT * FROM `class`
+              WHERE `Crs_Dep` = :dep_name';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':dep_name', $depName);
+    $statement->execute();
+    $class = $statement->fetch();
+    $statement->closeCursor();
+    $class_id = $class['UserID'];
+    return $class_id;
+}
+
 
 
 

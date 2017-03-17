@@ -12,7 +12,7 @@ require_once ('model/class_db.php');
 require_once ('model/posting_db.php'); // book_catalog table
 
 /**
-// TEST of Methods
+// TEST insert methods
 //insertUser($fName, $lName, $fineAmount, $userType, $password, $username)
 insertUser("Alex", "Ryder", 0, "admin", "---", "aryder");
 insertUser("John", "Shepard", 0, "faculty", "---", "jshep");
@@ -27,7 +27,7 @@ insertClass("MATH", 20, 1);
 
 //insertBook($title, $author, $classID, $ISBN)
 //insertPosting($bookID, $userID)
-insertBook("Learn Accounting", "Vince McMann", 1, "0486994536");
+insertBook("Learn Accounting", "Vince McMann", 1, "0486994536"); // change this to getClassIDWithDepName($depName)
 insertPosting(getBookIDWithTitle("Learn Accounting"), getUserIDWithUsername("jshep"));
 
 insertBook("Head First Java", "Bill Gates", 2, "0596009208");
@@ -40,4 +40,3 @@ insertBook("Calculus X", "Albert Einstein", 4, "0486404536");
 insertPosting(getBookIDWithISBN("0486404536"), getUserIDWithUsername("jdoe"));
 
 */
-
