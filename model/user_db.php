@@ -49,8 +49,8 @@ function getUserIDWithUsername($username){
     $statement->execute();
     $user = $statement->fetch();
     $statement->closeCursor();
-    $user_name = $user['Username'];
-    return $user_name;
+    $user_id = $user['UserID'];
+    return $user_id;
 }
 
 // get a user's fine amount with the @param $userID
