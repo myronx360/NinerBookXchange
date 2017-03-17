@@ -34,7 +34,22 @@ function getUserFirstNameByID($userID){
     $statement->execute();
     $user = $statement->fetch();
     $statement->closeCursor();
-    $user_name = user['First_Name'];
+    $user_name = $user['First_Name'];
+    return $user_name;
+}
+
+// get a userID with the $username@param
+function getUserIDWithUsername($username){
+    global $db;
+    // select user with username
+    $query = 'SELECT * FROM `user`
+              WHERE `Username` = :user_name';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user_name', $username);
+    $statement->execute();
+    $user = $statement->fetch();
+    $statement->closeCursor();
+    $user_name = $user['Username'];
     return $user_name;
 }
 
@@ -49,8 +64,8 @@ function getUserFineAmountByID($userID){
     $statement->execute();
     $user = $statement->fetch();
     $statement->closeCursor();
-    $user_name = user['Fine_Amount'];
-    return $user_name;
+    $user_fine = $user['Fine_Amount'];
+    return $user_fine;
 }
 
 // get a user's type with the @param $userID
@@ -64,8 +79,8 @@ function getUserTypeByID($userID){
     $statement->execute();
     $user = $statement->fetch();
     $statement->closeCursor();
-    $user_name = user['Type'];
-    return $user_name;
+    $user_type = $user['Type'];
+    return $user_type;
 }
 
 
@@ -91,7 +106,7 @@ function insertUser($fName, $lName, $fineAmount, $userType, $password, $username
 /** Update Statements */
 
 // update a user with @param $userID
-function updateBook($fName, $lName, $fineAmount, $userType, $password, $username){
+function updateUser($fName, $lName, $fineAmount, $userType, $password, $username){
     global $db;
 
     $query = "UPDATE `user` 

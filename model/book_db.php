@@ -22,7 +22,7 @@ function getAllBooks(){
     return $books;
 }
 
-// get a book with the @param $bookID
+// get a book Title with the $bookID@param
 function getBookTitleByID($bookID){
     global $db;
     // select book with bookID
@@ -35,6 +35,51 @@ function getBookTitleByID($bookID){
     $statement->closeCursor();
     $book_name = $book['Title'];
     return $book_name;
+}
+
+// get a book Info@param2 with the $bookID@param
+function getBookInfoByID($bookID, $info){
+    global $db;
+    // select book with bookID
+    $query = 'SELECT * FROM `book`
+              WHERE `BookID` = :book_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':book_id', $bookID);
+    $statement->execute();
+    $book = $statement->fetch();
+    $statement->closeCursor();
+    $book_name = $book[$info];
+    return $book_name;
+}
+
+// get a bookID with the @param $bookTitle
+function getBookIDWithTitle($bookTitle){
+    global $db;
+    // select book with bookID
+    $query = 'SELECT * FROM `book`
+              WHERE `Title` = :book_title';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':book_title', $bookTitle);
+    $statement->execute();
+    $book = $statement->fetch();
+    $statement->closeCursor();
+    $book_id = $book['BookID'];
+    return $book_id;
+}
+
+// get a bookID with the $bookISBN@param
+function getBookIDWithISBN($bookISBN){
+    global $db;
+    // select book with bookID
+    $query = 'SELECT * FROM `book`
+              WHERE `ISBN` = :book_isbn';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':book_isbn', $bookISBN);
+    $statement->execute();
+    $book = $statement->fetch();
+    $statement->closeCursor();
+    $book_id = $book['BookID'];
+    return $book_id;
 }
 
 
@@ -55,9 +100,11 @@ function insertBook($title, $author, $classID, $ISBN){
     $statment->bindParam(':newISBN', $ISBN);
     $statment->execute();
 }
+
+
 /** Update Statements */
 
-// upadete a book with @param $bookID
+// update a book with @param $bookID
 function updateBook($bookID, $title, $author, $classID, $ISBN){
     global $db;
 

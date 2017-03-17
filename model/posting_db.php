@@ -10,7 +10,7 @@
 require_once ('model/database.php');
 /** Select Statements */
 
-// select all of the books
+// select all of the postings
 function getAllPostings(){
     global $db;
     // select all
@@ -23,8 +23,21 @@ function getAllPostings(){
     return $postings;
 }
 
+// select all of the postings order by bookID
+function getAllPostingsOrderByBookID(){
+    global $db;
+    // select all
+    $query = 'SELECT * FROM `book_catalog`
+              ORDER BY `book_catalog`.`BookID`';
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $postings = $statement->fetchAll();
+    $statement->closeCursor();
+    return $postings;
+}
+
 // get a posting with the @param $bookID
-function getPostingByBookID($bookID){
+function getPostingWithBookID($bookID){
     global $db;
     // select book with bookID
     $query = 'SELECT * FROM `book_catalog`
@@ -44,7 +57,7 @@ function getPostingByBookID($bookID){
 /** Insert Statements */
 
 // insert new posting
-function insertPosting($bookID, $userID){
+function insertPosting($bookID, $userID){  // when ever a user adds a book
     global $db;
 
     $query = "INSERT INTO `book_catalog`(`BookID`, `UserID`) 
