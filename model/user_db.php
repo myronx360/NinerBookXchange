@@ -11,7 +11,7 @@ require_once ('model/database.php');
 /** Select Statements */
 
 // select all of the users
-function getAllBooks(){
+function getAllUsers(){
     global $db;
     // select all
     $query = 'SELECT * FROM `user`
@@ -105,32 +105,57 @@ function insertUser($fName, $lName, $fineAmount, $userType, $password, $username
 }
 /** Update Statements */
 
-// update a user with @param $userID
-function updateUser($fName, $lName, $fineAmount, $userType, $password, $username){
+/**
+ * @param $UserID
+ * @param $fName
+ * @param $lName
+ * @param $fineAmount
+ * @param $userType
+ * @param $password
+ * @param $username
+ */
+function updateUser($UserID, $fName, $lName, $fineAmount, $userType, $password, $username){
     global $db;
 
     $query = "UPDATE `user` 
               SET `First_Name`=:newFName, `Last_Name`=:newLName, `Fine_Amount`=:newFineAmount, `Type`=:newUserType, `Password`=:newPassword, `Username`=:newUsername
-              WHERE `UserID`=:newID";
-    $statment = $db->prepare($query);
-    $statment->bindParam(':newFName', $fName);
-    $statment->bindParam(':newLName', $lName);
-    $statment->bindParam(':newFineAmount', $fineAmount);
-    $statment->bindParam(':newUserType', $userType);
-    $statment->bindParam(':newPassword', $password);
-    $statment->bindParam(':newUsername', $username);
-    $statment->execute();
+              WHERE `UserID`=:ID";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':ID', $UserID);
+    $statement->bindParam(':newFName', $fName);
+    $statement->bindParam(':newLName', $lName);
+    $statement->bindParam(':newFineAmount', $fineAmount);
+    $statement->bindParam(':newUserType', $userType);
+    $statement->bindParam(':newPassword', $password);
+    $statement->bindParam(':newUsername', $username);
+    $statement->execute();
+}
+
+/**
+ * @param $UserID
+ * @param $fineAmount
+ */
+function updateUserFineAmount($UserID, $fineAmount){
+    global $db;
+
+    $query = "UPDATE `user` 
+              SET `Fine_Amount`=:newFineAmount
+              WHERE `UserID`=:ID";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':ID', $UserID);
+    $statement->bindParam(':newFineAmount', $fineAmount);
+    $statement->execute();
 }
 
 /** Delete Statements */
 
 // delete a user with @param $userID
-function deleteBook($userID){
+function deleteUser($userID){
     global $db;
 
     $query = "DELETE FROM `user` 
               WHERE `user`.`UserID` = :userID ";
-    $statment = $db->prepare($query);
-    $statment->bindParam(':userID', $userID);
-    $statment->execute();
+    $statement = $db->prepare($query);
+    $statement->bindParam(':userID', $userID);
+    $statement->execute();
 }

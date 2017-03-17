@@ -64,12 +64,12 @@ function updateClass($classID, $department, $crsNum, $section){
     $query = "UPDATE `class` 
               SET `Crs_Dep`=:newDep,`Crs_Num`=:newCrsNum,`Section`=:newSection
               WHERE `ClassID`=:newID";
-    $statment = $db->prepare($query);
-    $statment->bindParam(':newID', $classID);
-    $statment->bindParam(':newDep', $department);
-    $statment->bindParam(':newCrsNum', $crsNum);
-    $statment->bindParam(':newSection', $section);
-    $statment->execute();
+    $statement = $db->prepare($query);
+    $statement->bindParam(':newID', $classID);
+    $statement->bindParam(':newDep', $department);
+    $statement->bindParam(':newCrsNum', $crsNum);
+    $statement->bindParam(':newSection', $section);
+    $statement->execute();
 }
 
 /** Delete Statements */

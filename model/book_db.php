@@ -93,12 +93,12 @@ function insertBook($title, $author, $classID, $ISBN){
 
     $query = "INSERT INTO `book`(`Title`, `Author`, `ClassID`, `ISBN`) 
               VALUES (:newTitle, :newAuthor, :newClass, :newISBN)";
-    $statment = $db->prepare($query);
-    $statment->bindParam(':newTitle', $title);
-    $statment->bindParam(':newAuthor', $author);
-    $statment->bindParam(':newClass', $classID);
-    $statment->bindParam(':newISBN', $ISBN);
-    $statment->execute();
+    $statement = $db->prepare($query);
+    $statement->bindParam(':newTitle', $title);
+    $statement->bindParam(':newAuthor', $author);
+    $statement->bindParam(':newClass', $classID);
+    $statement->bindParam(':newISBN', $ISBN);
+    $statement->execute();
 }
 
 
@@ -111,13 +111,13 @@ function updateBook($bookID, $title, $author, $classID, $ISBN){
     $query = "UPDATE `book` 
               SET `Title`=:newTitle,`Author`=:newAuthor,`ClassID`=:newClass, `ISBN`=:newISBN
               WHERE `BookID`=:newID";
-    $statment = $db->prepare($query);
-    $statment->bindParam(':newID', $bookID);
-    $statment->bindParam(':newTitle', $title);
-    $statment->bindParam(':newAuthor', $author);
-    $statment->bindParam(':newClass', $classID);
-    $statment->bindParam(':newISBN', $ISBN);
-    $statment->execute();
+    $statement = $db->prepare($query);
+    $statement->bindParam(':newID', $bookID);
+    $statement->bindParam(':newTitle', $title);
+    $statement->bindParam(':newAuthor', $author);
+    $statement->bindParam(':newClass', $classID);
+    $statement->bindParam(':newISBN', $ISBN);
+    $statement->execute();
 }
 
 /** Delete Statements */
@@ -128,7 +128,7 @@ function deleteBook($bookID){
 
     $query = "DELETE FROM `book` 
               WHERE `book`.`BookID` = :bookID ";
-    $statment = $db->prepare($query);
-    $statment->bindParam(':bookID', $bookID);
-    $statment->execute();
+    $statement = $db->prepare($query);
+    $statement->bindParam(':bookID', $bookID);
+    $statement->execute();
 }
